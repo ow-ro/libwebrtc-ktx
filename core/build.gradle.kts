@@ -73,7 +73,7 @@ android {
 
 dependencies {
     api(kotlin("stdlib"))
-    compileOnly("com.github.crow-misia:libwebrtc-bin:_")
+    compileOnly("com.github.ow-ro:libwebrtc-bin:_")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
