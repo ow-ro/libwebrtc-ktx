@@ -122,7 +122,6 @@ afterEvaluate {
             }
         }
     }
-}
 
     tasks {
         withType<Test> {
