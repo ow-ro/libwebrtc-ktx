@@ -5,7 +5,6 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("org.jetbrains.dokka")
-    id("signing")
     id("maven-publish")
 }
 
@@ -154,23 +153,6 @@ afterEvaluate {
                 }
             }
         }
-        repositories {
-            maven {
-                val releasesRepoUrl = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2")
-                val snapshotsRepoUrl = URI("https://oss.sonatype.org/content/repositories/snapshots")
-                url = if (Maven.version.endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
-                val sonatypeUsername: String? by project
-                val sonatypePassword: String? by project
-                credentials {
-                    username = sonatypeUsername.orEmpty()
-                    password = sonatypePassword.orEmpty()
-                }
-            }
-        }
-    }
-
-    signing {
-        sign(publishing.publications.getByName("maven"))
     }
 }
 
