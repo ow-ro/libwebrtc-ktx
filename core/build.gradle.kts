@@ -106,9 +106,9 @@ afterEvaluate {
         publications {
             create<MavenPublication>("maven") {
                 from(components["release"])
-
                 groupId = Maven.groupId
                 artifactId = Maven.artifactId
+                version = Maven.version
 
                 println("""
                     |Creating maven publication
@@ -119,49 +119,18 @@ afterEvaluate {
 
                 artifact(sourcesJar)
                 artifact(javadocJar)
-
-                pom {
-                    name.set(Maven.name)
-                    description.set(Maven.desc)
-                    url.set(Maven.siteUrl)
-
-                    scm {
-                        val scmUrl = "scm:git:${Maven.gitUrl}"
-                        connection.set(scmUrl)
-                        developerConnection.set(scmUrl)
-                        url.set(Maven.gitUrl)
-                        tag.set("HEAD")
-                    }
-
-                    developers {
-                        developer {
-                            id.set("ow-ro")
-                            name.set("Owen Roberts")
-                            email.set("roberts.7@icloud.com")
-                            roles.set(listOf("Contributor", "Developer"))
-                            timezone.set("-8")
-                        }
-                    }
-
-                    licenses {
-                        license {
-                            name.set(Maven.licenseName)
-                            url.set(Maven.licenseUrl)
-                            distribution.set(Maven.licenseDist)
-                        }
-                    }
-                }
             }
         }
     }
 }
 
-tasks {
-    withType<Test> {
-        useJUnitPlatform()
-        testLogging {
-            showStandardStreams = true
-            events("passed", "skipped", "failed")
+    tasks {
+        withType<Test> {
+            useJUnitPlatform()
+            testLogging {
+                showStandardStreams = true
+                events("passed", "skipped", "failed")
+            }
         }
     }
 }
